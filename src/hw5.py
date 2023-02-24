@@ -5,7 +5,6 @@ import numpy as np
 def rnd(m):
     return np.round(m, decimals=5)
 
-
 ########################################### problem 17 ###########################################
 
 # intrinsic parameters
