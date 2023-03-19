@@ -2,6 +2,7 @@ import os
 import cv2
 import numpy as np
 import xml.etree.ElementTree as et
+from util import getprojdir
 
 def rnd(m):
     return np.round(m, decimals=5)
@@ -45,7 +46,7 @@ print("tvec:", rnd(tvec))
 
 print("_____________________________________________problem 12")
 
-projdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+projdir = getprojdir()
 img = cv2.imread(os.path.normpath(projdir + '/GOPR01170000.jpg'))
 xmlfile = os.path.normpath(projdir + '/12camera.xml')
 
