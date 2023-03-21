@@ -3,6 +3,9 @@ import os
 import numpy as np
 from util import getprojdir
 
+########################################### problem 11 ###########################################
+
+print("_____________________________________________problem 11")
 
 # checkerboard size
 board_size = (9, 7)
@@ -39,7 +42,7 @@ for i, image in enumerate(calibration_images):
         print("image " + str(imagecount) + " processed")
 
     # can increase the cutoff value if you want more images processed
-    # I set a small numbers because otherwise calculation time is huge!
+    # I set a small number because otherwise calculation time is huge!
     if i >= 60:
         break
 
