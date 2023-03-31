@@ -3,7 +3,8 @@ import os
 import numpy as np
 from tempfile import mkdtemp
 from util import getprojdir
-from scipy.sparse import csr_matrix, block_diag
+from scipy.sparse import csr_matrix, block_diag, hstack, vstack
+from scipy.sparse.linalg import spsolve
 
 
 ########################################### problem 20 ###########################################
@@ -34,9 +35,11 @@ vector_path = os.path.normpath(getprojdir() + '/rhs.csv')
 r = np.loadtxt(vector_path, delimiter=",")
 print("r", r.shape)
 
-# assemble H
-# H = np.block([[C, D.T.astype(C.dtype)], [D.astype(C.dtype), G]])
-# print("H", H.shape)
+E = np.concatenate((C, D), axis=1)
+F = hstack([D.T, G])
+H = vstack([E, F])
+print("H", H.shape)
 
-# x = np.linalg.solve(H, r)
-# print(x[:20])
+H_csr = csr_matrix(H)
+x = spsolve(H_csr, r)
+print(x[:20])
