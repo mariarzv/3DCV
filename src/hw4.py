@@ -4,9 +4,11 @@ import numpy as np
 import xml.etree.ElementTree as et
 from util import getprojdir
 
+
 def rnd(m):
     return np.round(m, decimals=5)
-########################################### problem 6 ############################################
+########################################### problem 6 ####################
+
 
 # intrinsic parameters
 fx = fy = 400
@@ -14,8 +16,8 @@ cx = 960
 cy = 540
 
 # extrinsic parameters
-r6 = np.array([[np.cos(np.pi/4), -np.sin(np.pi/4), 0.],
-              [np.sin(np.pi/4), np.cos(np.pi/4), 0.],
+r6 = np.array([[np.cos(np.pi / 4), -np.sin(np.pi / 4), 0.],
+              [np.sin(np.pi / 4), np.cos(np.pi / 4), 0.],
               [0., 0., 1.]])
 t6 = np.array([0., 0., 10.]).reshape(-1, 1)
 
@@ -25,12 +27,12 @@ k6 = np.array([[fx, 0., cx],
               [0., 0., 1.]])
 p6 = k6 @ np.hstack((r6, t6))
 
-########################################### problem 10 ###########################################
+########################################### problem 10 ###################
 
 print("_____________________________________________problem 10")
 # chessboard cell points
 cell_length = 0.2
-objp = np.zeros((8*8, 3), np.float32)
+objp = np.zeros((8 * 8, 3), np.float32)
 objp[:, :2] = np.mgrid[0:8, 0:8].T.reshape(-1, 2) * cell_length
 
 dist_coeffs = np.zeros((4, 1))  # no distortion
@@ -38,11 +40,12 @@ dist_coeffs = np.zeros((4, 1))  # no distortion
 objpproj, j = cv2.projectPoints(objp, r6, t6, k6, dist_coeffs)
 
 # PnP
-x, rvec, tvec, e = cv2.solvePnPGeneric(objp, objpproj, k6, None, flags=cv2.SOLVEPNP_ITERATIVE, rvec=None, tvec=None, useExtrinsicGuess=False)
+x, rvec, tvec, e = cv2.solvePnPGeneric(
+    objp, objpproj, k6, None, flags=cv2.SOLVEPNP_ITERATIVE, rvec=None, tvec=None, useExtrinsicGuess=False)
 print("rvec:", rnd(rvec))
 print("tvec:", rnd(tvec))
 
-########################################### problem 12 ###########################################
+########################################### problem 12 ###################
 
 print("_____________________________________________problem 12")
 
